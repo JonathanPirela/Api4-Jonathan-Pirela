@@ -1,0 +1,65 @@
+import unittest
+
+# Función para mostrar productos
+def mostrar_productos(data):
+    productos = data.get("products", [])
+    if not productos:
+        print("No hay productos para mostrar.")
+        return False
+
+    for producto in productos:
+        print(f"ID: {producto['id']}")
+        print(f"Nombre: {producto['name']}")
+        print(f"Descripción: {producto['description']}")
+        print(f"Precio: {producto['price']} {producto['currency']}")
+        print(f"Disponible: {'Sí' if producto['in_stock'] else 'No'}")
+        print("-" * 30)
+
+    return True
+
+# Datos de productos
+datos_productos = {
+    "products": [
+        {
+            "id": 1,
+            "name": "iPhone 13",
+            "description": "The latest iPhone from Apple",
+            "price": 999.99,
+            "currency": "USD",
+            "in_stock": True
+        },
+        {
+            "id": 2,
+            "name": "Samsung Galaxy S21",
+            "description": "The latest Samsung phone",
+            "price": 899.99,
+            "currency": "USD",
+            "in_stock": True
+        },
+        {
+            "id": 3,
+            "name": "Google Pixel 6",
+            "description": "The latest Google phone",
+            "price": 799.99,
+            "currency": "USD",
+            "in_stock": False
+        }
+    ]
+}
+
+# Clase de pruebas unitarias
+class TestMostrarProductos(unittest.TestCase):
+    def test_mostrar_productos_con_datos(self):
+        print("\n--- Test: Mostrar productos con datos ---")
+        resultado = mostrar_productos(datos_productos)
+        self.assertTrue(resultado)
+
+    def test_mostrar_productos_vacio(self):
+        print("\n--- Test: Mostrar productos con lista vacía ---")
+        datos_vacios = {"products": []}
+        resultado = mostrar_productos(datos_vacios)
+        self.assertFalse(resultado)
+
+# Ejecutar pruebas
+if __name__ == '__main__':
+    unittest.main(argv=[''], exit=False)
